@@ -4,13 +4,13 @@ Back-End repository for Co-Make Project.
 
 Back-End Developers: Unit 4 - Mike Hill
 
-## Deployed on Heroku [Co-Make Build Week Project](https://virtualrealityfunding.herokuapp.com/)
+## Deployed on Heroku [Co-Make Build Week Project](https://co-make-tattlenyourneighbors.herokuapp.com/)
 
 ## Users Schema
 
 #### Axios call for registering a new user:
 
-`axios.post(https://virtualrealityfunding.herokuapp.com/auth/register)`
+`axios.post(https://co-make-tattlenyourneighbors.herokuapp.com/auth/register)`
 
 - Required fields to register:
 
@@ -37,7 +37,7 @@ Back-End Developers: Unit 4 - Mike Hill
 }
 ```
 
-`axiosWithAuth().post(https://virtualrealityfunding.herokuapp.com/auth/login, credentials)`
+`axiosWithAuth().post(https://co-make-tattlenyourneighbors.herokuapp.com/auth/login, credentials)`
 
 - Required fields to login:
 
@@ -86,8 +86,8 @@ Back-End Developers: Unit 4 - Mike Hill
 
 #### Axios call for getting issues and comments:
 
-`axios.get(https://virtualrealityfunding.herokuapp.com/issues)` (requires token)
-`axios.get(https://virtualrealityfunding.herokuapp.com/issues/:id/comments)` (requires token)
+`axios.get(https://co-make-tattlenyourneighbors.herokuapp.com/issues)` (requires token)
+`axios.get(https://co-make-tattlenyourneighbors.herokuapp.com/issues/:id/comments)` (requires token)
 
 ## Endpoints
 
