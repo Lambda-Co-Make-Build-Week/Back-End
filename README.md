@@ -84,6 +84,21 @@ Back-End Developers: Unit 4 - Mike Hill
 }
 ```
 
+***Comments***
+```
+{
+  "comment": "test"
+}
+```
+
+######Returns:
+```
+{
+  "id": "test",
+  "comment": "testing"
+}
+```
+
 #### Axios call for getting issues and comments:
 
 `axios.get(https://co-make-tattlenyourneighbors.herokuapp.com/issues)` (requires token)
