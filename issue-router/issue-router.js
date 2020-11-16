@@ -16,13 +16,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', validateId, (req, res) => {
-    Issue.getIssueById(req.params.id)
-        .then(issue => {
-            res.status(200).json(issue);
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to get Issue ' });
-        });
+    Issue.getComments(req.params.id)
+    .then((comment) => {
+        Issue.getIssueById(req.params.id)
+            .then(issue => {
+                res.status(200).json({ ...issue, comments: comment });
+            })
+            .catch(err => {
+                res.status(500).json({ message: 'Failed to get Issue ' });
+            })
+    }).catch((err) => {
+        res.status(500).json({ message: 'Failed to get Issue ' });
+    })
 });
 
 router.post('/', validateIssueField, (req, res) => {
@@ -75,6 +80,8 @@ router.post('/:id/comments', validateCommentField, (req, res) => {
             res.status(500).json({ message: 'Failed to make new comment ' });
         });
 });
+
+
 
 
 function validateId(req, res, next) {
