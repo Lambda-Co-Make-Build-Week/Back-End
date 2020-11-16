@@ -18,13 +18,18 @@ router.get('/', (req, res) => {
 router.get('/:id', validateId, (req, res) => {
     Issue.getComments(req.params.id)
     .then((comment) => {
+        Issue.getLikes(req.params.id)
+        .then((likes) => {
         Issue.getIssueById(req.params.id)
             .then(issue => {
-                res.status(200).json({ ...issue, comments: comment });
+                res.status(200).json({ ...issue, comments: comment, likes: likes });
             })
             .catch(err => {
                 res.status(500).json({ message: 'Failed to get Issue ' });
             })
+        }) .catch(() => {
+            res.status(500).json({ message: 'failed to get likes ' })
+        })
     }).catch((err) => {
         res.status(500).json({ message: 'Failed to get Issue ' });
     })
@@ -80,6 +85,36 @@ router.post('/:id/comments', validateCommentField, (req, res) => {
             res.status(500).json({ message: 'Failed to make new comment ' });
         });
 });
+
+router.get("/:id/upvotes", (req, res) => {
+    Issue.getLikes(req.params.id)
+      .then((users) => {
+        res.status(200).json(users);
+      })
+      .catch((err) => res.send(err));
+  });
+
+
+  router.post("/:id/likes", (req, res) => {
+    Issue.getLikes(req.params.id)
+      .then((likes) => {
+        const arr = likes.map((likes) => likes.user_id);
+        if (arr.includes(req.decodedJwt.id)) {
+          Issue.dislikeIssue(req.decodedJwt.id, req.params.id)
+            .then(() => {
+              res.status(200).json({ message: "successfully disliked the post" });
+            })
+            .catch((err) => res.send(err));
+        } else {
+          Issue.likeIssue(req.decodedJwt.id, req.params.id)
+            .then(() => {
+              res.status(200).json({ message: "successfully liked the post" });
+            })
+            .catch((err) => res.send(err));
+        }
+      })
+      .catch((err) => res.send(err));
+  });
 
 
 

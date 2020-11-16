@@ -112,9 +112,11 @@ Back-End Developers: Unit 4 - Mike Hill
 |              | POST   | /auth/login           | Logs in a user, returns a token to be added to the header of other requests | username, password        |
 | **Projects** | POST   | /issues               | Adds a new issue, returns the added issue                                   | token                     |
 |              | GET    | /issues               | Returns a list of issues                                                    | token                     |
-|              | GET    | /issues/:id           | Returns a issue based on id                                                 | token                     |
+|              | GET    | /issues/:id           | Returns a issue based on id returns array of comments and likes             | token                     |
 |              | PUT    | /issues/:id           | Update with changes to a issue by id                                        | token                     |
 |              | DELETE | /issues/:id           | Deletes the issue by id                                                     | token                     |
 | **Comments** | GET    | /issues/:id/comments  | Returns list of comments by issue                                           | token                     |
 |              | POST   | /issues/:id/comments  | Adds a new comments by issue                                                | token                     |
+| **upvotes**  | POST   | /issues/:id/likes     | likes / dislikes post                                                       | token                     |
+|              | GET    | /issues/:id/upvotes   | gets array of people who liked                                              | token                     |
 

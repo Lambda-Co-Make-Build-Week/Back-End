@@ -35,5 +35,17 @@ module.exports = {
         return db('comments')
             .insert(newComment, 'id')
             .then(() => this.getComments(newComment.issue_id))
+    },
+    getLikes(issue_id){
+        return db("upvotes as up")
+        .join("users as u", "up.user_id", "u.id")
+        .select("up.user_id", "u.username")
+        .where({ issue_id });
+    },
+    likeIssue(user_id, issue_id){
+        return db("upvotes").insert({ user_id, issue_id })
+    },
+    dislikeIssue(user_id, issue_id){
+        return db("upvotes").delete().where({ user_id, issue_id })
     }
 }
